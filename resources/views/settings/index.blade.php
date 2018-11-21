@@ -30,6 +30,19 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-4">
+          <div class="form-group">
+            <div class="form-label">Privacy Settings</div>
+              <label class="custom-switch">
+              {!! Form::hidden('is_visible', 0) !!}
+              {!! Form::checkbox('is_visible', 1, null, ['class' => "custom-switch-input"]) !!}
+              <span class="custom-switch-indicator"></span>
+              <span class="custom-switch-description">Hide private donation details.</span>
+            </label>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="card-footer text-right">
         <button type="submit" class="btn btn-primary btn-sm">Update Campaign</button>

@@ -1,7 +1,5 @@
 @extends('layouts.auth')
 
-@section('header', true)
-
 @section('content')
 <div class="col col-login mx-auto">
   <div class="text-center mb-6">

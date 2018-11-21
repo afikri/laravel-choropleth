@@ -25,7 +25,9 @@ class MobileCauseServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('mobilecause', function () {
-          $token = config('mobilecause.token', null);
+          if($token = config('mobilecause.token')) {
+            throw new TokenNotFoundException;
+          }
 
           $connection = new Connection($token);
 
