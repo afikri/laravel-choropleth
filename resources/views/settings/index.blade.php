@@ -35,8 +35,8 @@
           <div class="form-group">
             <div class="form-label">Privacy Settings</div>
               <label class="custom-switch">
-              {!! Form::hidden('is_visible', 0) !!}
-              {!! Form::checkbox('is_visible', 1, null, ['class' => "custom-switch-input"]) !!}
+              {!! Form::hidden('campaign[privacy]', 0) !!}
+              {!! Form::checkbox('campaign[privacy]', 1, $campaign->privacy, ['class' => "custom-switch-input"]) !!}
               <span class="custom-switch-indicator"></span>
               <span class="custom-switch-description">Hide private donation details.</span>
             </label>

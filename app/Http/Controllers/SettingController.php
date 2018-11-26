@@ -18,6 +18,7 @@ class SettingController extends Controller
       $campaign->name = optional(Setting::find('campaign.name'))->value;
       $campaign->start_date = optional(Setting::find('campaign.start_date'))->value;
       $campaign->end_date = optional(Setting::find('campaign.end_date'))->value;
+      $campaign->privacy = optional(Setting::find('campaign.privacy'))->value;
       $settings = Setting::where('key', 'NOT LIKE', 'campaign.%')->get();
 
 
