@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\State;
 use App\Models\Donation;
+use App\Notifications\StateEnabled;
+use App\Notifications\StateDisabled;
+
+use Notification;
 use Illuminate\Http\Request;
 
 class StateController extends Controller
@@ -75,10 +80,18 @@ class StateController extends Controller
      */
     public function update(Request $request, State $state)
     {
-        $state->update($request->all());
+      if($request->has('is_visible')) {
+        if($request->input('is_visible') == true) {
+          Notification::send(User::all(), new StateEnabled($state, $request->user()));
+        } elseif($request->input('is_visible') == false) {
+          Notification::send(User::all(), new StateDisabled($state, $request->user()));
+        }
+      }
 
-        flash($state->name . ' has been successfully updated.')->success();
-        return back();
+      $state->update($request->all());
+
+      flash($state->name . ' has been successfully updated.')->success();
+      return back();
     }
 
     /**

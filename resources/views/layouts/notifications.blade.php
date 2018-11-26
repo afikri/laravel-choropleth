@@ -15,6 +15,9 @@
           @case('App\Notifications\DonationReceived')
             <i class="fe fe-dollar-sign"></i>
             @break
+          @case('App\Notifications\StateEnabled' || 'App\Notifications\StateDisabled')
+            <i class="fe fe-map-pin"></i>
+            @break
 
           @default
             Default case...
@@ -22,8 +25,25 @@
 
       </span>
       <div>
+    @switch($notification->type)
+      @case('App\Notifications\DonationReceived')
         <strong>{{ $notification->data['name'] }}</strong> donated ${{ $notification->data['amount'] }}.
         <div class="small text-muted">{{ Carbon\Carbon::parse($notification->data['created_at']['date'])->diffForHumans() }}</div>
+        @break
+
+      @case('App\Notifications\StateEnabled')
+        <strong>{{ $notification->data['user'] }}</strong> enabled {{ $notification->data['state'] }}.
+        <div class="small text-muted">{{ Carbon\Carbon::parse($notification->data['created_at']['date'])->diffForHumans() }}</div>
+        @break
+
+      @case('App\Notifications\StateDisabled')
+        <strong>{{ $notification->data['user'] }}</strong> disabled {{ $notification->data['state'] }}.
+        <div class="small text-muted">{{ Carbon\Carbon::parse($notification->data['created_at']['date'])->diffForHumans() }}</div>
+        @break
+
+      @default
+        Notification
+    @endswitch
       </div>
     </a>
     @else
